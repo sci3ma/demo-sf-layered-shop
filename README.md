@@ -58,4 +58,4 @@ password: test
 ### View product
 `http://127.0.0.1:8000/product/view/{id}`
 ### View list of products
-`http://127.0.0.1:8000/product/view/list`
+`http://127.0.0.1:8000/product/list`
