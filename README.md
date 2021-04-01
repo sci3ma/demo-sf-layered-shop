@@ -30,13 +30,21 @@
 - https://github.com/sci3ma/symfony-grumphp
 
 ## Installation
-To install project, clone this repository the build containers:
+To install project, clone this repository then build containers:
 ```shell
 $ docker-compose build
 ```
-and run:
+run containers:
 ```shell
 $ docker-compose up -d
+```
+install composer dependencies:
+```shell
+$ docker exec -it php composer install
+```
+run doctrine migrations:
+```shell
+$ docker/console doctrine:migrations:migrate
 ```
 
 ## Usage
