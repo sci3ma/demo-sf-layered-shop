@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/bin/.phpunit/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         cacheResultFile=".phpunit.cache/test-results"
+         bootstrap="tests/bootstrap.php"
+>
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <ini name="memory_limit" value="-1" />
+        <env name="APP_ENV" value="test" force="true"/>
+        <env name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="SYMFONY_PHPUNIT_VERSION" value="9.3"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
+        <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
+    </php>
+
+    <testsuites>
+        <testsuite name="Application">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <!--
+    <extensions>
+        it begins a database transaction before every testcase and rolls it back after
+             the test finished, so tests can manipulate the database without affecting other tests
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+    </extensions>
+    -->
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+        <!--        <listener class="Symfony\Bridge\PhpUnit\CoverageListener" />-->
+    </listeners>
+
+    <coverage cacheDirectory=".phpunit.cache/code-coverage"
+              processUncoveredFiles="true"
+              ignoreDeprecatedCodeUnits="true">
+        <include>
+            <directory suffix=".php">.</directory>
+        </include>
+
+        <exclude>
+            <directory>./tests</directory>
+            <directory>./vendor</directory>
+            <directory>./public</directory>
+            <directory>./config</directory>
+            <directory>./var</directory>
+            <directory>./bin</directory>
+            <directory>./src/Infrastructure/Migrations</directory>
+            <directory>./src/Kernel.php</directory>
+            <directory>./php_cs.php</directory>
+            <directory>./src/Application/Product/Form/Model</directory>
+        </exclude>
+    </coverage>
+</phpunit>

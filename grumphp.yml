@@ -1,0 +1,111 @@
+# https://github.com/phpro/grumphp
+grumphp:
+    stop_on_failure: false
+    process_timeout: 120
+    parallel:
+        enabled: true
+        max_workers: 20
+    # https://github.com/phpro/grumphp/blob/master/doc/tasks.md
+    tasks:
+        clover_coverage:
+            clover_file: ./build/logs/clover.xml
+            level: 70
+            metadata:
+                priority: 1
+        git_blacklist:
+            keywords:
+                - "die\\("
+                - "var_dump\\("
+                - "exit;"
+                - "echo "
+                - "dump\\("
+                - "dd\\("
+            regexp_type: G
+            whitelist_patterns:
+                - /^public\/(.*)/
+                - /^vendor\/(.*)/
+            metadata:
+                priority: 999
+        phpcpd:
+            directory: ['.']
+            exclude: ['vendor', 'public', 'var', 'config', 'bin', 'translations', 'src/Presentation/Translations', 'src/Migrations', 'src/Infrastructure/Migrations', 'tests', 'src/DataFixtures', 'migrations']
+            fuzzy: false
+            min_lines: 5
+            min_tokens: 50
+            metadata:
+                priority: 999
+        phpcsfixer:
+            rules:
+                - '@PhpCsFixer'
+                - -multiline_whitespace_before_semicolons
+                - -php_unit_internal_class
+                - -php_unit_test_class_requires_covers
+                - -no_superfluous_phpdoc_tags
+                - '@DoctrineAnnotation'
+            verbose: true
+            diff: true
+            config: .php_cs
+            metadata:
+                priority: 999
+        phplint:
+            triggered_by: ['php', 'phtml', 'php3', 'php4', 'php5']
+            metadata:
+                priority: 999
+        phpmd:
+            exclude: ['tests', 'config', 'var', 'src/Migrations', 'src/Infrastructure/Migrations', 'migrations']
+            ruleset: ['cleancode', 'codesize', 'controversial', 'design', 'unusedcode']
+            metadata:
+                priority: 999
+        phpstan:
+            configuration: phpstan.neon
+            level: 7
+            memory_limit: '-1'
+            metadata:
+                priority: 999
+        phpunitbridge:
+            config_file: phpunit.xml.dist
+            testsuite: Application
+            always_execute: true
+            metadata:
+                priority: 999
+        securitychecker_enlightn:
+            lockfile: composer.lock
+            run_always: false
+            metadata:
+                priority: 999
+        shell:
+            scripts:
+                - ['-c', './vendor/bin/simple-phpunit --coverage-clover ./build/logs/clover.xml']
+            metadata:
+                priority: 2
+    # https://github.com/phpro/grumphp/blob/master/doc/testsuites.md
+    testsuites:
+        security:
+            tasks:
+                - securitychecker_enlightn
+        phpunitbridge:
+            tasks:
+                - phpunitbridge
+        phpcsmd:
+            tasks:
+                - phpcsfixer
+                - phpmd
+        no-phpunitbridge:
+            tasks:
+                - git_blacklist
+                - phpcpd
+                - phpcsfixer
+                - phplint
+                - phpmd
+                - phpstan
+                - securitychecker_enlightn
+        phpcsfixer:
+            tasks:
+                - phpcsfixer
+        phpstan:
+            tasks:
+                - phpstan
+        coverage:
+            tasks:
+                - shell
+                - clover_coverage

@@ -1,0 +1,25 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: 'auto'
+    providers:
+        users_in_memory:
+            memory:
+                users:
+                    admin@example.com: { password: '$argon2id$v=19$m=65536,t=4,p=1$DC8NoZaVWYLGrkAAbKMg2A$zVS4J3sxt4Jfo6fTzZWWg300tBOnbt0np40Xw6yP7DA', roles: ['ROLE_ADMIN'] }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            lazy: true
+            provider: users_in_memory
+            guard:
+                authenticators:
+                    - App\Application\User\Service\LoginFormAuthenticator
+            logout:
+                path: security_logout
+                target: product_list
+
+    access_control:
+         - { path: ^/product/add, roles: ROLE_ADMIN }

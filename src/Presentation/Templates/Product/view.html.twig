@@ -1,0 +1,13 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('product_list') }}">View all products</a> <a
+                href="{{ path('product_add') }}">Add new product</a>
+    </div>
+
+    <div>id: {{ productView.id }}</div>
+    <div>title: {{ productView.title }}</div>
+    <div>description: {{ productView.description }}</div>
+    <div>price: {{ productView.price|price }}</div>
+{% endblock %}

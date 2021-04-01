@@ -1,0 +1,48 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    currency.type: '%env(string:CURRENCY_TYPE)%'
+    mail.sender.email: '%env(SENDER_EMAIL)%'
+    mail.recipient.email: '%env(RECIPIENT_EMAIL)%'
+    pagination.items_per_page: '%env(int:ITEMS_PER_PAGE)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $currencyType: '%currency.type%'
+            $itemsPerPage: '%pagination.items_per_page%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Infrastructure/DependencyInjection/'
+            - '../src/Infrastructure/Migrations/'
+            - '../src/Domain/Entity/'
+            - '../src/Presentation/Templates/'
+            - '../src/Presentation/Controller/'
+            - '../src/Kernel.php'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Presentation\Controller\:
+        resource: '../src/Presentation/Controller/'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Domain\Entity\Product\EventListener\ProductAddedNotifier:
+        tags:
+            -
+                name: 'doctrine.orm.entity_listener'
+                event: 'postPersist'
+                entity: 'App\Domain\Entity\Product\Product'
+                lazy: true

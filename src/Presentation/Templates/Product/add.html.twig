@@ -1,0 +1,16 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('product_list') }}">View all products</a>
+    </div>
+
+    <div>
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.price) }}
+        <button type="submit">Save</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
