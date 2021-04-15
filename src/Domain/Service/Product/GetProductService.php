@@ -24,7 +24,7 @@ final class GetProductService implements GetProductServiceInterface
         try {
             $productUild = Ulid::fromString($productId);
         } catch (InvalidArgumentException $exception) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException('Product not found', $exception);
         }
 
         if (null === $product = $this->findProductQuery->byId($productUild)->execute()) {

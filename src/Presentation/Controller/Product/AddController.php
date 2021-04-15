@@ -6,7 +6,7 @@ namespace App\Presentation\Controller\Product;
 
 use App\Application\Product\Form\Model\ProductCreateFormModel;
 use App\Application\Product\Form\Type\ProductCreateType;
-use App\Domain\Entity\Product\Product;
+use App\Domain\Entity\Product\ProductFactory;
 use App\Domain\Repository\Product\SaveProductQueryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ final class AddController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product = Product::createFromFormModel($form->getData());
+            $product = ProductFactory::createFromFormModel($form->getData());
             $saveProductQuery->execute($product);
 
             return $this->redirectToRoute('product_view', [

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity\Product;
 
-use App\Application\Product\Form\Model\ProductCreateFormModel;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -53,15 +52,6 @@ final class Product
         $this->title = $title;
         $this->description = $description;
         $this->price = $price;
-    }
-
-    public static function createFromFormModel(ProductCreateFormModel $productCreateFormModel): self
-    {
-        return new self(
-            $productCreateFormModel->title,
-            $productCreateFormModel->description,
-            $productCreateFormModel->price
-        );
     }
 
     public function getId(): ?Ulid
