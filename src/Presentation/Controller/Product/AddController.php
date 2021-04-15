@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/product/add", name="product_add")
  */
-class AddController extends AbstractController
+final class AddController extends AbstractController
 {
     public function __invoke(
         Request $request,

@@ -8,7 +8,7 @@ use App\Domain\Entity\Product\Product;
 use App\Domain\Repository\Product\SaveProductQueryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class SaveProductQuery implements SaveProductQueryInterface
+final class SaveProductQuery implements SaveProductQueryInterface
 {
     private EntityManagerInterface $entityManager;
 

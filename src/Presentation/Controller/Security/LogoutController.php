@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/logout", name="security_logout")
  */
-class LogoutController
+final class LogoutController
 {
     public function __invoke(): void
     {

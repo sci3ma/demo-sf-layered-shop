@@ -12,7 +12,7 @@ use Symfony\Component\Notifier\ChatterInterface;
 use Symfony\Component\Notifier\Exception\TransportExceptionInterface;
 use Symfony\Component\Notifier\Message\ChatMessage;
 
-class SlackChannel implements ChannelInterface
+final class SlackChannel implements ChannelInterface
 {
     private ChatterInterface $chatter;
 

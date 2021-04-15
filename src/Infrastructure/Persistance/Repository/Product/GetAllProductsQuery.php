@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 
-class GetAllProductsQuery implements GetAllProductsQueryInterface
+final class GetAllProductsQuery implements GetAllProductsQueryInterface
 {
     private EntityManagerInterface $entityManager;
 

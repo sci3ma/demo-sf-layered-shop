@@ -7,7 +7,7 @@ namespace App\Domain\Entity\Product\Event;
 use App\Domain\Entity\Product\Product;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ProductAddedEvent extends Event
+final class ProductAddedEvent extends Event
 {
     public const NAME = 'product.added';
 

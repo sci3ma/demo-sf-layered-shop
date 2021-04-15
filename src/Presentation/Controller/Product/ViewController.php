@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/product/view/{productId}", name="product_view")
  */
-class ViewController extends AbstractController
+final class ViewController extends AbstractController
 {
     public function __invoke(GetProductServiceInterface $getProductService, string $productId): Response
     {

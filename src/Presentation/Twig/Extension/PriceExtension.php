@@ -8,7 +8,7 @@ use Symfony\Component\Intl\Currencies;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class PriceExtension extends AbstractExtension
+final class PriceExtension extends AbstractExtension
 {
     private string $currencyType;
 

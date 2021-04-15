@@ -10,7 +10,7 @@ use InvalidArgumentException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Uid\Ulid;
 
-class GetProductService implements GetProductServiceInterface
+final class GetProductService implements GetProductServiceInterface
 {
     private FindProductQueryInterface $findProductQuery;
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Symfony\Component\Uid\AbstractUid;
 
-class FindProductQuery implements FindProductQueryInterface
+final class FindProductQuery implements FindProductQueryInterface
 {
     private ?AbstractUid $id = null;
     private EntityManagerInterface $entityManager;

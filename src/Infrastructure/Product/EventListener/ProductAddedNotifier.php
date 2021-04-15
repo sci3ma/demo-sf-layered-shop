@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Entity\Product\EventListener;
+namespace App\Infrastructure\Product\EventListener;
 
 use App\Domain\Entity\Product\Event\ProductAddedEvent;
 use App\Domain\Entity\Product\Product;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ProductAddedNotifier
+final class ProductAddedNotifier
 {
     private EventDispatcherInterface $dispatcher;
 

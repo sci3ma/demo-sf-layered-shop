@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/product/list", name="product_list")
  */
-class ListController extends AbstractController
+final class ListController extends AbstractController
 {
     public function __invoke(
         PaginatorInterface $paginator,

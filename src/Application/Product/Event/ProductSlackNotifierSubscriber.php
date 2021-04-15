@@ -9,7 +9,7 @@ use App\Domain\Entity\Product\Event\ProductAddedEvent;
 use App\Infrastructure\Transport\SlackChannel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ProductSlackNotifierSubscriber implements EventSubscriberInterface
+final class ProductSlackNotifierSubscriber implements EventSubscriberInterface
 {
     private SlackChannel $channel;
 
