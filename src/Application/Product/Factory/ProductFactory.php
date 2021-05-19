@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Entity\Product;
+namespace App\Application\Product\Factory;
 
 use App\Application\Product\Form\Model\ProductCreateFormModel;
+use App\Domain\Entity\Product\Product;
 
 final class ProductFactory
 {

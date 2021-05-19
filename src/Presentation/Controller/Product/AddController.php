@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Presentation\Controller\Product;
 
+use App\Application\Product\Factory\ProductFactory;
 use App\Application\Product\Form\Model\ProductCreateFormModel;
 use App\Application\Product\Form\Type\ProductCreateType;
-use App\Domain\Entity\Product\ProductFactory;
 use App\Domain\Repository\Product\SaveProductQueryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

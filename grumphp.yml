@@ -14,12 +14,12 @@ grumphp:
                 priority: 1
         git_blacklist:
             keywords:
-                - "die\\("
-                - "var_dump\\("
-                - "exit;"
-                - "echo "
-                - "dump\\("
-                - "dd\\("
+                - 'die('
+                - 'var_dump('
+                - 'exit;'
+                - 'echo '
+                - 'dump\('
+                - 'dd\('
             regexp_type: G
             whitelist_patterns:
                 - /^public\/(.*)/
@@ -73,6 +73,18 @@ grumphp:
             run_always: false
             metadata:
                 priority: 999
+        deptrac:
+            depfile: ~
+            formatter: []
+#            graphviz_display: ~
+            graphviz_dump_image: ~
+            graphviz_dump_dot: ~
+            graphviz_dump_html: ~
+            junit_dump_xml: ~
+            xml_dump: ~
+            baseline_dump: ~
+            metadata:
+                priority: 999
         shell:
             scripts:
                 - ['-c', './vendor/bin/simple-phpunit --coverage-clover ./build/logs/clover.xml']
@@ -109,3 +121,6 @@ grumphp:
             tasks:
                 - shell
                 - clover_coverage
+        deptrac:
+            tasks:
+                - deptrac

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Application\User\Service;
+namespace App\Tests\Application\User\Service;
 
+use App\Application\User\Service\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

@@ -24,3 +24,7 @@
 /.env.test
 /.idea
 /build
+
+###> qossmic/deptrac-shim ###
+/.deptrac.cache
+###< qossmic/deptrac-shim ###
