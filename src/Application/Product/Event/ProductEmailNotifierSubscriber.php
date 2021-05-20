@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Application\Product\Event;
 
 use App\Application\Product\Model\ProductViewModel;
+use App\Application\Product\Transport\EmailChannelInterface;
 use App\Domain\Entity\Product\Event\ProductAddedEvent;
-use App\Infrastructure\Transport\EmailChannel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class ProductEmailNotifierSubscriber implements EventSubscriberInterface
 {
-    private EmailChannel $channel;
+    private EmailChannelInterface $channel;
 
-    public function __construct(EmailChannel $channel)
+    public function __construct(EmailChannelInterface $channel)
     {
         $this->channel = $channel;
     }

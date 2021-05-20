@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Application\Product\Event;
 
 use App\Application\Product\Model\ProductViewModel;
+use App\Application\Product\Transport\SlackChannelInterface;
 use App\Domain\Entity\Product\Event\ProductAddedEvent;
-use App\Infrastructure\Transport\SlackChannel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class ProductSlackNotifierSubscriber implements EventSubscriberInterface
 {
-    private SlackChannel $channel;
+    private SlackChannelInterface $channel;
 
-    public function __construct(SlackChannel $channel)
+    public function __construct(SlackChannelInterface $channel)
     {
         $this->channel = $channel;
     }

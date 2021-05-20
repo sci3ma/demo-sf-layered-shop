@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Transport;
 
-use InvalidArgumentException;
+use App\Application\Product\Transport\EmailChannelInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
-final class EmailChannel implements ChannelInterface
+final class EmailChannel implements EmailChannelInterface
 {
     private MailerInterface $mailer;
 
@@ -18,12 +18,8 @@ final class EmailChannel implements ChannelInterface
         $this->mailer = $mailer;
     }
 
-    public function send(string $subject, array $context, ?string $template = null): void
+    public function send(string $subject, array $context, string $template): void
     {
-        if (null === $template) {
-            throw new InvalidArgumentException('Valid template path is required');
-        }
-
         $email = (new TemplatedEmail())
             ->subject($subject)
             ->htmlTemplate($template)

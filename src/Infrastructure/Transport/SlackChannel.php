@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Transport;
 
 use App\Application\Product\Model\ProductViewModel;
+use App\Application\Product\Transport\SlackChannelInterface;
 use InvalidArgumentException;
 use Symfony\Component\Notifier\Bridge\Slack\Block\SlackActionsBlock;
 use Symfony\Component\Notifier\Bridge\Slack\SlackOptions;
@@ -12,7 +13,7 @@ use Symfony\Component\Notifier\ChatterInterface;
 use Symfony\Component\Notifier\Exception\TransportExceptionInterface;
 use Symfony\Component\Notifier\Message\ChatMessage;
 
-final class SlackChannel implements ChannelInterface
+final class SlackChannel implements SlackChannelInterface
 {
     private ChatterInterface $chatter;
 
@@ -21,7 +22,7 @@ final class SlackChannel implements ChannelInterface
         $this->chatter = $chatter;
     }
 
-    public function send(string $subject, array $context, ?string $template = null): void
+    public function send(string $subject, array $context): void
     {
         if (!isset($context['product']) || !$context['product'] instanceof ProductViewModel) {
             throw new InvalidArgumentException('Context array is not valid. Should contains Product.');

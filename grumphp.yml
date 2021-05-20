@@ -75,7 +75,7 @@ grumphp:
                 priority: 999
         deptrac:
             depfile: ~
-            formatter: []
+            formatter: ['table']
 #            graphviz_display: ~
             graphviz_dump_image: ~
             graphviz_dump_dot: ~

@@ -33,9 +33,8 @@ ruleset:
         - Application
         - Presentation
     Presentation:
-        - Application
         - Domain
+        - Application
     Application:
         - Domain
-        - Infrastructure
     Domain:
