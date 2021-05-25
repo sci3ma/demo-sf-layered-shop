@@ -17,6 +17,7 @@ services:
         bind:
             $currencyType: '%currency.type%'
             $itemsPerPage: '%pagination.items_per_page%'
+            iterable $productNotificationStrategies: !tagged_iterator app.product.notification.strategy
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -46,3 +47,7 @@ services:
                 event: 'postPersist'
                 entity: 'App\Domain\Entity\Product\Product'
                 lazy: true
+
+    _instanceof:
+        App\Application\Product\Transport\ChannelInterface:
+            tags: [ 'app.product.notification.strategy' ]

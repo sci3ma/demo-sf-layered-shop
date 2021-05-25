@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Transport;
 
-use App\Application\Product\Transport\EmailChannelInterface;
+use App\Application\Product\Transport\ChannelInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
-final class EmailChannel implements EmailChannelInterface
+final class EmailChannel implements ChannelInterface
 {
     private MailerInterface $mailer;
 
@@ -18,7 +18,7 @@ final class EmailChannel implements EmailChannelInterface
         $this->mailer = $mailer;
     }
 
-    public function send(string $subject, array $context, string $template): void
+    public function send(string $subject, array $context, ?string $template = null): void
     {
         $email = (new TemplatedEmail())
             ->subject($subject)

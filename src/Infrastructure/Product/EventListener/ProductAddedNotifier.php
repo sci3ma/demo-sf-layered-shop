@@ -4,24 +4,30 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Product\EventListener;
 
-use App\Domain\Entity\Product\Event\ProductAddedEvent;
+use App\Application\Product\Model\ProductViewModel;
+use App\Application\Product\Transport\ChannelInterface;
 use App\Domain\Entity\Product\Product;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class ProductAddedNotifier
 {
-    private EventDispatcherInterface $dispatcher;
+    /**
+     * @var ChannelInterface[]|iterable
+     */
+    private iterable $productNotificationStrategies;
 
-    public function __construct(EventDispatcherInterface $dispatcher)
+    public function __construct(iterable $productNotificationStrategies)
     {
-        $this->dispatcher = $dispatcher;
+        $this->productNotificationStrategies = $productNotificationStrategies;
     }
 
     public function postPersist(Product $product): void
     {
-        $this->dispatcher->dispatch(
-            new ProductAddedEvent($product),
-            ProductAddedEvent::NAME
-        );
+        foreach ($this->productNotificationStrategies as $productNotificationStrategy) {
+            $productNotificationStrategy->send(
+                'New product added.',
+                ['product' => ProductViewModel::fromEntity($product)],
+                '@App/Product/email/added.html.twig'
+            );
+        }
     }
 }
